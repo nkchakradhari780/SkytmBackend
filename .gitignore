@@ -1,0 +1,68 @@
+## Build Results
+bin/
+obj/
+
+## Rider and VSCode
+.idea/
+.vscode/
+
+## Visual Studio Files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+## Mac & Windows OS junk
+.DS_Store
+Thumbs.db
+
+## Package Management
+packages/
+*.nupkg
+*.snupkg
+
+## Logs
+*.log
+
+## Secrets & Configuration
+appsettings.Development.json
+appsettings.Local.json
+secrets.json
+
+## Entity Framework Migrations temp
+Migrations/
+
+## Publish Output
+publish/
+out/
+
+## Test Results
+TestResults/
+*.trx
+*.coverage
+*.coveragexml
+
+## Other temp files
+*.tmp
+*.bak
+*.swp
+*.sln.ide
+
+## ReSharper
+_ReSharper*/
+*.DotSettings.user
+
+## Dotnet CLI
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+## Global JetBrains (e.g. Rider) folder
+.idea/
+
+## Azure Pipeline artifacts
+*.azure-pipelines.yml
+
+# User-specific files
+*.vs/
+.vs/
