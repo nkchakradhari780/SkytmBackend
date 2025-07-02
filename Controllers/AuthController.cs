@@ -24,7 +24,8 @@ namespace SkytmBackend.Controllers
 
             try
             {
-                if(_context.Users.Any(u => u.PhoneNumber == dto.PhoneNumber)){
+                if (_context.Users.Any(u => u.PhoneNumber == dto.PhoneNumber))
+                {
                     response.Result = null;
                     response.Response = "This phone number is already registered";
                     response.ResponseCode = "200";
@@ -35,12 +36,13 @@ namespace SkytmBackend.Controllers
                     userName = dto.Username,
                     Email = dto.Email,
                     PhoneNumber = dto.PhoneNumber,
-                    Gender = dto.PhoneNumber,
+                    Gender = dto.Gender,
                     password = dto.password,
-                    ImageUrl = dto.ImageUrl,
                     Amount = 0,
                     IsAdmin = dto.IsAdmin
                 };
+
+
                 try
                 {
                     _context.Users.Add(user);
@@ -50,21 +52,58 @@ namespace SkytmBackend.Controllers
                     response.Response = "Registered Successfully!!";
                     response.ResponseCode = "200";
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     response.Result = null;
-                    response.Response = "Error Adding User" + ex.Message;
+                    response.Response = " Hii Error Adding User" + ex.InnerException.Message;
                     response.ResponseCode = "400";
 
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 response.Result = null;
-                response.Response = "Bad Request" + ex.Message;
+                response.Response = "Bad Request" + ex.InnerException.Message;
                 response.ResponseCode = "400";
             }
 
+            return response;
+        }
+
+        [HttpPost("login")]
+
+        public ApiResponse Login(LoginDto dto)
+        {
+            ApiResponse response = new ApiResponse();
+            try
+            {
+                var user = _context.Users.FirstOrDefault(u => u.PhoneNumber == dto.PhoneNumber);
+                if(user == null)
+                {
+                    response.Result = null;
+                    response.Response = "User Not Found !";
+                    response.ResponseCode = "200";
+                    return response;
+                }
+                if (user.password != dto.password)
+                {
+                    response.Result = null;
+                    response.Response = "Incorrect Phone Number or password !";
+                    response.ResponseCode = "200";
+                    return response;
+                }
+
+                response.Result = user;
+                response.ResponseCode = "200";
+                response.Response = "LoggedIn Successfully";
+
+            }
+            catch (Exception ex)
+            {
+                response.Result = null;
+                response.ResponseCode = "400";
+                response.Response = "Error Loginin User: " + ex.ToString();
+            }
             return response;
         }
     }

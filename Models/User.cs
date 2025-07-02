@@ -9,7 +9,6 @@
         public string Gender { get; set; }
         public string password { get; set; }
         public decimal Amount { get; set; }
-        public string ImageUrl { get; set; }
         public DateTime CreateDate { get; set; } = DateTime.UtcNow;
         public bool IsAdmin { get; set; } = false;
     }
